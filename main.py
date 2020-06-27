@@ -30,7 +30,7 @@ while True:
             itime=int(p+30) if type(p)!="NoneType" else 10
             driver.execute_script(r'setTimeout(function(){ $("#evaluationComment").text("good!");courseDetailEvaluation();setTimeout(function(){ nextCourse(); },(%s*1000),0);},(%s*1000),0);' % (str(contSplitSec+10),str(itime+10)))
             time.sleep(5)
-            driver.execute_script(r'try{ player.play(); }catch(exception){ $(".pv-playpause").click(); }')
+            driver.execute_script(r'try{ setTimeout(player.play(),%s*1000,0); }catch(exception){ setTimeout($(".pv-playpause").click(),%s*1000,0); }'%(str(contSplitSec),(contSplitSec)))
             time.sleep(itime+20)
     except:
         driver.refresh()
